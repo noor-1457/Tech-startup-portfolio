@@ -51,7 +51,7 @@ function Home() {
       <section className="min-h-screen flex flex-col items-center justify-center px-5 py-20 text-center bg-gradient-to-r from-[#dda0dd] to-[#7C3AED] text-white">
         <p
           id="typing-text"
-          className="text-[clamp(1.5rem,4vw,2rem)] font-semibold min-h-[40px]"
+          className="text-[clamp(1.5rem,4vw,2.5rem)] font-bold min-h-[40px]"
         ></p>
 
         <p className="mt-5 max-w-[700px] text-[clamp(1rem,2.5vw,1.2rem)]">

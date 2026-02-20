@@ -9,6 +9,7 @@ import CaseStudies from "./pages/CaseStudies";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Signup from "./pages/Signup";
+import InquiryList from "./pages/InquiryList";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/inquiries" element={<InquiryList />} />
       </Routes>
       <Footer />
     </BrowserRouter>

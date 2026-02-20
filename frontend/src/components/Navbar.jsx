@@ -33,6 +33,14 @@ const Navbar = () => {
         </li>
         <li>
           <Link
+            to="/inquiries"
+            className="hover:text-[#873260] transition-colors"
+          >
+            Inquiry
+          </Link>
+        </li>
+        <li>
+          <Link
             to="/case-studies"
             className="hover:text-[#873260] transition-colors"
           >

@@ -15,24 +15,58 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
+  const handleSubmit = async (e) => {
 
-    setTimeout(() => {
-      setLoading(false);
+  e.preventDefault();
+
+  setLoading(true);
+
+  try {
+
+    const res = await fetch("http://localhost:5000/api/contact", {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(formData),
+
+    });
+
+    const data = await res.json();
+    console.log("API Response:", data);
+    if (data.success) {
+
       setSubmitted(true);
+
       setFormData({
         name: "",
         email: "",
         company: "",
         message: "",
       });
-    }, 1500);
-  };
+
+    }
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Failed to send message");
+
+  } finally {
+
+    setLoading(false);
+
+  }
+
+};
+
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#dda0dd] to-[#7C3AED] px-6 py-16">
+    <section className="mt-10 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#dda0dd] to-[#7C3AED] px-6 py-16">
 
       {/* Transparent Glass Container */}
       <div className="w-full max-w-xl backdrop-blur-xl bg-white/10 border border-white/30 rounded-2xl shadow-2xl p-8 animate-fadeIn">

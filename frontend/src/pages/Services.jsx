@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Services = () => {
+
   const services = [
     {
       title: "AI Solutions",
@@ -34,52 +35,144 @@ const Services = () => {
     },
   ];
 
+
+  // Inquiry Form State
+
+  const [formData, setFormData] = useState({
+
+    name: "",
+    email: "",
+    company: "",
+    service: "",
+    budget: "",
+    timeline: "",
+    description: ""
+
+  });
+
+  const [message, setMessage] = useState("");
+
+
+
+  const handleChange = (e) => {
+
+    setFormData({
+
+      ...formData,
+      [e.target.name]: e.target.value
+
+    });
+
+  };
+
+
+
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+      const res = await fetch("http://localhost:5000/api/inquiry", {
+
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+
+        setMessage("Inquiry submitted successfully!");
+
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          service: "",
+          budget: "",
+          timeline: "",
+          description: "",
+        });
+
+      }
+
+    } catch {
+
+      setMessage("Error submitting inquiry");
+
+    }
+
+  };
+
+
+
+
   return (
-    <div className="bg-gradient-to-r from-[#dda0dd] to-[#7C3AED] text-white min-h-screen">
+
+    <div className="bg-gradient-to-r from-[#dda0dd] to-[#7C3AED] text-black min-h-screen">
 
 
-      {/* Hero Section */}
+      {/* Hero */}
+
       <section className="text-center py-20">
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+        <h1 className="text-5xl font-bold mb-4">
+
           Our Services
+
         </h1>
 
-        <p className="text-white max-w-xl mx-auto">
-          We provide innovative technology solutions to grow your business.
+        <p>
+
+          We provide innovative technology solutions
+
         </p>
 
       </section>
 
 
 
-      {/* Services Cards */}
+      {/* Services */}
+
       <section className="px-6 md:px-20 pb-20">
 
         <div className="grid md:grid-cols-3 gap-8">
+
 
           {services.map((service, index) => (
 
             <div
               key={index}
-              className="bg-blue-600 p-8 rounded-xl hover:scale-105  transition duration-300 cursor-pointer"
+              className="bg-white p-8 rounded-xl hover:scale-105 transition"
             >
 
-              <div className="text-4xl mb-4">
+              <div className="text-4xl">
+
                 {service.icon}
+
               </div>
 
-              <h2 className="text-xl font-semibold mb-2">
+              <h2 className="text-xl font-semibold">
+
                 {service.title}
+
               </h2>
 
-              <p className="text-white hover:text-white">
+              <p>
+
                 {service.desc}
+
               </p>
 
             </div>
 
           ))}
+
 
         </div>
 
@@ -87,23 +180,171 @@ const Services = () => {
 
 
 
-      {/* CTA Section */}
-      <section className="text-center pb-20">
 
-        <h2 className="text-3xl font-bold mb-4">
-          Ready to Grow Your Business?
-        </h2>
+      {/* Inquiry Form Section */}
 
-        <button className="bg-[#6366F1] px-8 py-3 rounded-lg hover:bg-[#4F46E5] transition">
-          Contact Us
-        </button>
+      <section className="px-6 md:px-20 pb-20">
+
+
+        <div className="bg-white p-10 rounded-xl max-w-3xl mx-auto">
+
+
+          <h2 className="text-3xl font-bold mb-6 text-center">
+
+            Get Free Consultation
+
+          </h2>
+
+
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+
+
+            <input
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full border p-3 rounded"
+            />
+
+
+            <input
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full border p-3 rounded"
+            />
+
+
+            <input
+              name="company"
+              placeholder="Company"
+              value={formData.company}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+            />
+
+
+
+            <select
+              name="service"
+              value={formData.service}
+              onChange={handleChange}
+              required
+              className="w-full border p-3 rounded"
+            >
+
+              <option value="">
+
+                Select Service
+
+              </option>
+
+              <option>
+
+                AI Automation
+
+              </option>
+
+              <option>
+
+                Machine Learning
+
+              </option>
+
+              <option>
+
+                Data Analytics
+
+              </option>
+
+              <option>
+
+                Process Automation
+
+              </option>
+
+              <option>
+
+                Custom AI
+
+              </option>
+
+              <option>
+
+                Consulting
+
+              </option>
+
+            </select>
+
+
+
+            <input
+              name="budget"
+              placeholder="Budget"
+              value={formData.budget}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+            />
+
+
+            <input
+              name="timeline"
+              placeholder="Timeline"
+              value={formData.timeline}
+              onChange={handleChange}
+              className="w-full border p-3 rounded"
+            />
+
+
+
+            <textarea
+              name="description"
+              placeholder="Description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+              className="w-full border p-3 rounded"
+            />
+
+
+
+            <button
+              className="bg-gradient-to-r from-[#78184a] to-[#7C3AED] text-white py-3 rounded-lg text-white w-full py-3 rounded"
+            >
+
+              Submit Inquiry
+
+            </button>
+
+
+          </form>
+
+
+          <p className="text-center mt-4">
+
+            {message}
+
+          </p>
+
+
+        </div>
+
 
       </section>
 
 
 
+
     </div>
+
   );
+
 };
 
 export default Services;
