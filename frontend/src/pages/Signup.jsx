@@ -33,7 +33,7 @@ function Signup() {
   };
 
   return (
-    <div className="mt-6 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#dda0dd] to-[#7C3AED] px-4">
+    <div className="mt-6cc min-h-screen flex items-center justify-center bg-gradient-to-r from-[#dda0dd] to-[#7C3AED] px-4">
       <div className="bg-white w-full max-w-md p-8 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold text-center text-[#7C3AED] mb-6">
           Create Account
